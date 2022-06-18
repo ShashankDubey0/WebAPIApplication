@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using WebAPI.Authentication;
 using Microsoft.OpenApi.Models;
 
-var allowedOrigins = "allowedOrogins";
+var allowedOrigins = "allowedOrigin";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,7 +50,7 @@ builder.Services.AddCors(options=>
     options.AddPolicy(name: allowedOrigins,
         builder =>
         {
-            builder.WithOrigins("http://localhost:4200")
+            builder.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
         });
@@ -73,6 +73,7 @@ builder.Services.AddAuthentication(x=>{
         IssuerSigningKey = new SymmetricSecurityKey(Key)
     };
 });
+builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
 
 builder.Services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
 
@@ -87,10 +88,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
+app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.MapControllers();
-
 app.UseCors(allowedOrigins);
+
+app.UseMvc();
+
+app.MapControllers();
 
 app.Run();

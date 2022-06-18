@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Authentication;
@@ -17,14 +16,13 @@ namespace WebAPI.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly IJWTManagerRepository _jWTManager;
 
-        public EmployeesController(DataContext context, IJWTManagerRepository jWTManager)
+        public EmployeesController(DataContext context)
         {
             _context = context;
-            _jWTManager = jWTManager;
         }
 
+        
         // GET: api/Employees
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
@@ -118,20 +116,7 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("authenticate")]
-        public IActionResult Authenticate(Users usersdata)
-        {
-            var token = _jWTManager.Authenticate(usersdata);
-
-            if (token == null)
-            {
-                return Unauthorized();
-            }
-
-            return Ok(token);
-        }
+        
 
         private bool EmployeeExists(int id)
         {
