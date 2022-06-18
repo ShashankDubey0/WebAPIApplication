@@ -267,3 +267,4 @@ C:\Users\Shashank.dubey\source\repos\WebAPIApplication\WebAPI\bin\Debug\net6.0\r
 C:\Users\Shashank.dubey\source\repos\WebAPIApplication\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\Shashank.dubey\source\repos\WebAPIApplication\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Shashank.dubey\source\repos\WebAPIApplication\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Shashank.dubey\source\repos\WebAPIApplication\WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
